@@ -1,517 +1,217 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Profile &mdash; Reza Soroush Rezume WebSite</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Reza Soroush Rezume WebSite" />
-    <meta name="keywords" content="my resume website " />
-    <meta name="author" content="reza soroush" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reza Soroush — Backend Developer & Creative Thinker</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{
+  height:100%;
+  font-family:"Poppins",sans-serif;
+  background:#f5f8ff;
+  color:#002855;
+}
 
-    <!--
-    //////////////////////////////////////////////////////
+/* ===== DESKTOP SECTION ===== */
+.scene{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  cursor:pointer;
+  transition:all .8s ease;
+}
+.half{
+  position:absolute;top:0;bottom:0;width:50%;
+  overflow:hidden;transition:width .8s ease;
+}
+.left{left:0;background:radial-gradient(circle at 30% 50%,#e8f3ff,#d1e7ff 60%,#f5f8ff 100%);}
+.right{right:0;background:linear-gradient(160deg,#ffd6a5,#ff9e7a,#ff7f6b);}
+.half img{
+  position:absolute;top:0;height:100vh;width:auto;object-fit:cover;pointer-events:none;transition:transform 1s ease;
+}
+.left img{left:50%;transform:translateX(-100%) translateX(+15px);}
+.right img{left:50%;transform:translateX(0%) translateX(-15px);}
+.backend-title,.creative-title{
+  position:absolute;top:50%;transform:translateY(-50%);
+  font-weight:800;font-size:3rem;letter-spacing:1.2px;
+  white-space:nowrap;transition:all .8s ease;z-index:5;
+}
+.backend-title{right:5%;text-align:right;color:#002855;}
+.creative-title{left:10%;text-align:left;color:#fffaf2;text-shadow:0 0 10px rgba(0,0,0,0.25);}
+.code-intro{
+  position:absolute;top:50%;left:55%;transform:translateY(-50%);
+  font-family:"JetBrains Mono","Consolas",monospace;color:#d1e9ff;
+  background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:12px;
+  font-size:1rem;width:min(500px,45%);
+  box-shadow:0 0 30px rgba(0,0,0,0.25);
+  line-height:1.7;z-index:3;opacity:0;transition:opacity .8s ease,left 1s ease;
+  white-space:pre;overflow:hidden;backdrop-filter:blur(4px);
+}
+.code-header{
+  display:flex;align-items:center;justify-content:space-between;background:#161b22;padding:.45rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.code-dots{display:flex;gap:6px;}
+.dot{width:12px;height:12px;border-radius:50%;}
+.dot.red{background:#ff5f56;} .dot.yellow{background:#ffbd2e;} .dot.green{background:#27c93f;}
+.code-filename{color:#c9d1d9;font-size:.85rem;}
+.code-body{padding:1.2rem 1.5rem;overflow-y:auto;max-height:70vh;word-break:break-word;}
+.keyword{color:#4aa3ff;font-weight:600;} .string{color:#f77f00;} .var{color:#ffb703;} .prop{color:#80ff80;}
 
-    FREE HTML5 TEMPLATE
-    DESIGNED & DEVELOPED by FreeHTML5.co
+/* scene states */
+.scene.center .left{width:50%;}
+.scene.center .right{width:50%;}
+.scene.center .backend-title{opacity:1;}
+.scene.center .creative-title{opacity:1;}
+.scene.center .code-intro{opacity:0;}
+.scene.left-active .left{width:100%;}
+.scene.left-active .right{width:0;}
+.scene.left-active .backend-title{opacity:0;}
+.scene.left-active .creative-title{opacity:0;}
+.scene.left-active .code-intro{opacity:1;left:52%;}
+.scene.right-active .right{width:100%;}
+.scene.right-active .left{width:0;}
+.scene.right-active .backend-title{opacity:0;}
+.scene.right-active .creative-title{opacity:1;left:10%;}
+.scene.right-active .code-intro{opacity:0;}
 
-    Website: 		http://freehtml5.co/
-    Email: 			info@freehtml5.co
-    Twitter: 		http://twitter.com/fh5co
-    Facebook: 		https://www.facebook.com/fh5co
-
-    //////////////////////////////////////////////////////
-     -->
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:description" content="" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
-
-    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="css/icomoon.css">
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-
-    <!-- Theme style  -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Modernizr JS -->
-    <script src="js/modernizr-2.6.2.min.js"></script>
-    <!-- FOR IE9 below -->
-    <!--[if lt IE 9]>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-
+/* ===== MOBILE REWORK ===== */
+@media (max-width:768px){
+  html,body{overflow-y:auto;height:auto;background:#f5f8ff;}
+  .scene{
+    height:auto;
+    cursor:default;
+    overflow:visible;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .half{display:none;} /* Hide split halves */
+  .divider{display:none;}
+  .mobile-hero{
+    width:100%;
+    padding:2.5rem 1rem 1rem 1rem;
+    text-align:center;
+  }
+  .mobile-face{
+    position:relative;
+    width:100%;
+    max-width:360px;
+    margin:0 auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .mobile-face img{
+    width:100%;
+    max-width:360px;
+    height:auto;
+    object-fit:cover;
+    mix-blend-mode:multiply;
+    opacity:.95;
+  }
+  .mobile-titles{
+    margin-top:1rem;
+    text-align:center;
+    line-height:1.2;
+    animation:fadeIn 1.2s ease forwards;
+  }
+  .mobile-titles h2{
+    margin:0.2rem 0;
+    font-weight:800;
+  }
+  .mobile-titles .backend{color:#003366;font-size:1.4rem;}
+  .mobile-titles .creative{color:#ff7f50;font-size:1.4rem;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+  .code-intro{
+    position:relative;
+    width:90%;
+    margin:2rem auto 2rem auto;
+    transform:none;left:auto;top:auto;opacity:1;
+    font-size:.82rem;
+  }
+  .code-body{
+    max-height:none;
+    overflow-y:visible;
+    white-space:pre-wrap;
+  }
+}
+</style>
 </head>
 <body>
 
-    <div class="fh5co-loader"></div>
+<div class="scene center" id="scene">
 
-    <div id="page">
-        <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image:url(images/cover_bg_3.jpg);" data-stellar-background-ratio="0.5">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center">
-                        <div class="display-t js-fullheight">
-                            <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-                                <div class="profile-thumb" style="background: url(images/Profile.jpg);"></div>
-                                <h1><span>Reza Soroush</span></h1>
-                                <h3><span>.Net Developer / Game Developer</span></h3>
-                                <p>
-                                    <ul class="fh5co-social-icons">
-                                        <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=rezasoroush28@gmail.com"><i class="icon-envelope"></i></a></li>
-                                        <li><a href="https://github.com/rezasoroush28"><i class="icon-github"></i></a></li>
-                                        <li><a href="https://www.linkedin.com/in/reza-soroush-a2863a179/"><i class="icon-linkedin2"></i></a></li>
-                                    </ul>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+  <!-- desktop halves -->
+  <div class="half left">
+    <img src="dark-avatar.png" alt="Backend Developer" />
+    <div class="backend-title">Backend Developer</div>
+    <div class="code-intro">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="code-filename">Profile.cs</div>
+      </div>
+      <div class="code-body">
+<span class="keyword">Console</span>.<span class="prop">WriteLine</span>(<span class="string">"Hello, I'm Reza Soroush 👋"</span>);
 
-        <div id="fh5co-about" class="animate-box">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <h2>About Me</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <ul class="info">
-                            <li><span class="first-block">Full Name:</span><span class="second-block">Reza Soroush</span></li>
-                            <li><span class="first-block">Phone:</span><span class="second-block">+98 919 869 4538</span></li>
-                            <li><span class="first-block">Email:</span><span class="second-block"> rezasoroush28 @gmail.com</span></li>
-                            <li><span class="first-block">residence:</span><span class="second-block"</span>Tehran / Qom</li>
-                        </ul>
-                    </div>
-                    <style>
-                    </style>
+<span class="keyword">var</span> profile = <span class="keyword">new</span> {
+    Role = <span class="string">"Backend Developer"</span>,
+    Stack = <span class="keyword">new</span>[] { 
+        <span class="string">"C#"</span>, 
+        <span class="string">".NET Core"</span>, 
+        <span class="string">"Entity Framework"</span>, 
+        <span class="string">"LINQ"</span>,
+        <span class="string">"CQRS"</span>, 
+        <span class="string">"MediatR"</span>,
+        <span class="string">"SQL Server"</span>, 
+        <span class="string">"Docker"</span>,
+        <span class="string">"Elasticsearch"</span>
+    },
+    Motto = <span class="string">"Clean architecture. Clean mind."</span>
+};
+      </div>
+    </div>
+  </div>
 
-                    <div class="col-md-8">
-                        <h2>Let's know about me:)</h2>
-                        <p>
-                            I’m a creative problem-solver who thrives on turning ideas into reality, whether it’s through coding or designing products. I love diving into new challenges and am always eager to learn and grow.
-                        </p>
-                        <p>
+  <div class="half right">
+    <img src="creative-avatar.png" alt="Creative Thinker" />
+    <div class="creative-title">Creative Thinker</div>
+  </div>
 
-                            s a highly creative Backend Developer with a solid foundation in C# and .NET, I bring a unique blend of technical
-                            expertise and problem-solving skills to every project. With experience in MVC frameworks and the Unity game
-                            engine, I’ve developed robust applications and APIs that meet complex business needs. My exposure to frontend
-                            development using jQuery and AJAX enhances my ability to contribute to full-stack projects.
-                            Additionally, I have gained valuable insights into modern architectural approaches, such as microservices, and have
-                            explored tools like RabbitMQ, Mediatr, and CQRS patterns to enhance scalability and efficiency in software solutio
-                            While I am still expanding my expertise in these areas, I am deeply fascinated by their potential and continually seek
-                            opportunities to deepen my understanding and apply them effectively.
-                            Passionate about product design and business logic, I thrive on turning innovative ideas into practical solutions that
-                            drive success. My curiosity and drive to acquire new skills ensure that I remain adaptable and ready to tackle
-                            challenges in an ever-evolving tech landscape
-                        </p>
-                        <p>
-                            <ul class="fh5co-social-icons">
-                                <li><a href="https://www.linkedin.com/in/reza-soroush-a2863a179/"><i class="icon-linkedin2"></i></a></li>
-                                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=rezasoroush28@gmail.com"><i class="icon-envelope"></i></a></li>
-                                <li><a href="https://github.com/rezasoroush28"><i class="icon-github"></i></a></li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- mobile hero -->
+  <div class="mobile-hero">
+    <div class="mobile-face">
+      <img src="dark-avatar.png" alt="Backend">
+      <img src="creative-avatar.png" alt="Creative">
+    </div>
+    <div class="mobile-titles">
+      <h2 class="backend">Backend Developer</h2>
+      <h2 class="creative">Creative Thinker</h2>
+    </div>
+  </div>
+</div>
 
-        <div id="fh5co-resume" class="fh5co-bg-color">
-            <div class="container">
-                <div class="row animate-box">
-                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <h2>The Resume</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-md-offset-0">
-                        <ul class="timeline">
-                            <li class="timeline-heading text-center animate-box">
-                                <div><h3>Work Experience</h3></div>
-                            </li>
-                            <li class="animate-box timeline-unverted">
-                                <div class="timeline-badge"><i class="icon-suitcase"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h3 class="timeline-title">.Net fullstack Developer</h3>
-                                        <span class="company">Tesla Commerce - 1402 - 1403 </span>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>
-                                            I have 6 months of work experience as a ".Net fullstack Developer" working with the "NopCommerce" framework.
-                                            Above the job title, I had the opportunity to set up a business plan and also design a product.
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="timeline-inverted animate-box">
-                                <div class="timeline-badge"><i class="icon-suitcase"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h3 class="timeline-title">Unity Developer</h3>
-                                        <span class="company">Medrick - 1401</span>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>I have 2 months of work experience in "Unity Development" as a trainee.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="animate-box timeline-unverted">
-                                <div class="timeline-badge"><i class="icon-suitcase"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h3 class="timeline-title">Rehabilitation Game Developer</h3>
-                                        <span class="company">Sharif Cognitive Robotic Lab - 1400</span>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>I have 3 months of work experience at the Sharif Cognitive Robotic Lab as a game developer and game designer. The games were designed to serve a rehabilitation role for target patients.</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <br>
-                            <li class="timeline-heading text-center animate-box">
-                                <div><h3>Education</h3></div>
-                            </li>
-                            <li class="timeline-inverted animate-box">
-                                <div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h3 class="timeline-title">Bachelor's Degree</h3>
-                                        <span class="company">Sharif University of Technology - 1398 - 1401</span>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>I studied as a Mechanical Engineering student at Sharif University of Technology.</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div id="fh5co-features" class="animate-box">
-            <div class="container">
-                <div class="services-padding">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                            <h2>My Services</h2>
-                        </div>
-                    </div>
-                    <style>
-                        body {
-                            font-family: 'Roboto', sans-serif;
-                        }
-
-                        .feature-left {
-                            margin-bottom: 30px;
-                        }
-
-                        .icon {
-                            font-size: 3em;
-                            color: #3498db;
-                        }
-
-                        h3 {
-                            font-weight: 500;
-                        }
-
-                        p {
-                            font-weight: 400;
-                        }
-                    </style>
-
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <div class="feature-left">
-                                <span class="icon">
-                                    <i class="icon-code"> </i>
-                                </span>
-                                <div class="feature-copy">
-                                    <h3>.NET Fullstack Development</h3>
-                                    <p>End-to-end development using .NET, from backend to frontend, ensuring robust and scalable solutions.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 text-center">
-                            <div class="feature-left">
-                                <span class="icon">
-                                    <i class="icon-shopping-cart"> </i>
-                                </span>
-                                <div class="feature-copy">
-                                    <h3>NopCommerce Customization</h3>
-                                    <p>Tailor NopCommerce solutions to meet specific business needs, enhancing e-commerce experiences.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 text-center">
-                            <div class="feature-left">
-                                <span class="icon">
-                                    <i class="icon-puzzle"> </i>
-                                </span>
-                                <div class="feature-copy">
-                                    <h3>Unity Game Development</h3>
-                                    <p>Create engaging and interactive games or simulations, focusing on education and rehabilitation.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <div class="feature-left">
-                                <span class="icon">
-                                    <i class="icon-lightbulb"> </i>
-                                </span>
-                                <div class="feature-copy">
-                                    <h3>AI-Enhanced Development</h3>
-                                    <p>Leverage AI tools like ChatGPT to accelerate coding and automate tasks, optimizing development processes.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 text-center">
-                            <div class="feature-left">
-                                <span class="icon">
-                                    <i class="icon-cogs"> </i>
-                                </span>
-                                <div class="feature-copy">
-                                    <h3>Product Design & Development</h3>
-                                    <p>Turn ideas into reality by focusing on user-centric design and technical feasibility, from concept to completion.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 text-center">
-                            <div class="feature-left">
-                                <span class="icon">
-                                    <i class="icon-puzzle"> </i>
-                                </span>
-                                <div class="feature-copy">
-                                    <h3>Innovative Problem Solving</h3>
-                                    <p>Analyze and solve complex problems with creative thinking and systematic approaches, ensuring optimal solutions.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-        <div id="fh5co-skills" class="animate-box">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <h2> Skills</h2>
-                    </div>
-                </div>
-                <div class="row row-pb-md">
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> .Net(c#)</strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> .Net Core</strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong>CQRS </strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> Sql Server</strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> Entity FrameWork</strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> Microservice</strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> Web Api</strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> MVC </strong> </span> </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="chart" data-percent="100"> <span> <strong> Jwt </strong> </span> </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="progress-wrap">
-                            <h3> <span class="name-left"> Clean Architecture</span> <span class="value-right"> </span> </h3>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-1 progress-bar-striped active" role="progressbar"
-                                     aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrap">
-                            <h3> <span class="name-left"> LINQ</span> <span class="value-right"> </span> </h3>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-2 progress-bar-striped active" role="progressbar"
-                                     aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrap">
-                            <h3> <span class="name-left"> OOP</span> <span class="value-right"> </span> </h3>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-3 progress-bar-striped active" role="progressbar"
-                                     aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrap">
-                            <h3> <span class="name-left"> Razor</span> <span class="value-right"> </span> </h3>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-4 progress-bar-striped active" role="progressbar"
-                                     aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:100">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="progress-wrap">
-                            <h3> <span class="name-left"> Machine Learning</span> <span class="value-right"> </span> </h3>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                     aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:100">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrap">
-                            <h3> <span class="name-left"> Git </span> <span class="value-right"></span> </h3>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-1 progress-bar-striped active" role="progressbar"
-                                     aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:100">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="fh5co-work" class="fh5co-bg-dark">
-            <div class="container">
-                <div class="row animate-box">
-                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <h2> Work</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 text-center col-padding animate-box">
-                        <a href="https://www.linkedin.com/posts/reza-soroush-a2863a179_rezasoroush-aspabrmvc-abrnet-activity-7235698867449581568-qBr4?utm_source=share&utm_medium=member_desktop"
-                           class="work" style="background-image: url(images/portfolio-1.jpg);">
-                            <div class="desc">
-                                <h3> Gold Project</h3>
-                                <span> NopCommerce </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 text-center col-padding animate-box">
-                        <a href="https://www.linkedin.com/posts/reza-soroush-a2863a179_cognitive-webabrapi-aspabrdotabrnet-activity-7235785274977394688-TvJ4?utm_source=share&utm_medium=member_desktop
-                        " class="work" style="background-image: url(images/portfolio-2.jpg);">
-                            <div class="desc">
-                                <h3> Cognitive Journals</h3>
-                                <span> Web_Api</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 text-center col-padding animate-box">
-                        <a href="https://www.linkedin.com/posts/reza-soroush-a2863a179_unitydeveloper-eventabrsystem-unity2d-activity-7096926425353478146-3RHk?utm_source=share&utm_medium=member_desktop
-                        " class="work" style="background-image: url(images/portfolio-3.jpg);">
-                            <div class="desc">
-                                <h3> Crazy Tetris</h3>
-                                <span> Unity Game Engine</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 text-center col-padding animate-box">
-                        <a href="https://drive.google.com/drive/folders/1sEY8XwbyQ9bLxT0NIAIqvoAYYDf_Uv4A?usp=drive_link
-                        " class="work" style="background-image: url(images/portfolio-4.jpg);">
-                            <div class="desc">
-                                <h3> My Music tracks</h3>
-                                <span> Classic Guitar</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="fh5co-started" class="fh5co-bg-dark">
-            <div class="overlay"> </div>
-            <div class="container">
-                <div class="row animate-box">
-                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <h2> Hire Me!</h2>
-                        <p> I am passinate to start a new journey to learn and work and solve problems.</p>
-                        <p> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rezasoroush28@gmail.com" class="btn btn-default btn-lg"> Contact</a> </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div id="fh5co-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p> Thanks for your time</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="gototop js-top">
-            <a href="#" class="js-gotop"> <i class="icon-arrow-up22"> </i> </a>
-        </div>
-        <!-- jQuery -->
-        <script src="js/jquery.min.js"></script>
-        <!-- jQuery Easing -->
-        <script src="js/jquery.easing.1.3.js"></script>
-        <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Waypoints -->
-        <script src="js/jquery.waypoints.min.js"></script>
-        <!-- Stellar Parallax -->
-        <script src="js/jquery.stellar.min.js"></script>
-        <!-- Easy PieChart -->
-        <script src="js/jquery.easypiechart.min.js"></script>
-        <!-- Google Map -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-        <script src="js/google_map.js"></script>
-        <!-- Main -->
-        <script src="js/main.js"></script>
-
+<script>
+const scene=document.getElementById("scene");
+let currentState="center";
+let lock=false;
+function switchScene(newState){
+  if(window.innerWidth<769)return; // disable hover logic on mobile
+  if(lock||currentState===newState)return;
+  currentState=newState;lock=true;
+  scene.className="scene "+newState;
+  setTimeout(()=>lock=false,600);
+}
+scene.addEventListener("mousemove",(e)=>{
+  const x=e.clientX,width=window.innerWidth;
+  const leftZone=width*0.35,rightZone=width*0.65;
+  if(x<leftZone)switchScene("left-active");
+  else if(x>rightZone)switchScene("right-active");
+  else switchScene("center");
+});
+scene.addEventListener("mouseleave",()=>switchScene("center"));
+</script>
 </body>
 </html>
-
